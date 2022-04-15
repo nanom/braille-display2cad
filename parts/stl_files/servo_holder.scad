@@ -3,8 +3,8 @@ $fn = 25;
 $fs = .4;
 $fa = 1;
 
-// --- Components ---
-module servo_back(a=2) {
+// --- Holder sides ---
+module back_side(a=2) {
     translate([0,0,-10])
     rotate([90,0,0])
     difference() {
@@ -21,7 +21,7 @@ module servo_back(a=2) {
     }
 }
 
-module servo_left(a=2) {
+module left_side(a=2) {
     difference() {
         translate([0,-a,0])
             rotate([0,-90,0])
@@ -34,7 +34,7 @@ module servo_left(a=2) {
     }
 }
 
-module servo_rigth(a=2) {
+module rigth_side(a=2) {
     union(){
         difference() {
             translate([18.7+a,-a,0])
@@ -59,7 +59,7 @@ module servo_rigth(a=2) {
     }
 }
 
-module servo_front(a=2) {
+module front_side(a=2) {
     difference() {
         translate([18.7-1,17,0])
         rotate([90,0,0])
@@ -73,24 +73,22 @@ module servo_front(a=2) {
 }
 
 
-// --- Parts ---
-module partA(mm=2) {
+// --- Servo holders ---
+module servoHolderA(mm=2) {
     union() {
-        servo_back(mm);
-        servo_left(mm);
-        servo_rigth(mm);
-        servo_front(mm);
+        back_side(mm);
+        left_side(mm);
+        rigth_side(mm);
+        front_side(mm);
     }
 }
 
-module partB(mm=2) {
+module servoHolderB(mm=2) {
     mirror([1,0,0])
-        partA(mm);
+        servoHolderA(mm);
 }
 
 // --------------------------------------------
 
-partA(mm=2);
-partB(mm=2);
-
-
+servoHolderA(mm=2);
+servoHolderB(mm=2);
